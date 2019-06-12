@@ -1,0 +1,17 @@
+{
+  "key": "string",
+  "someKey": 1234,
+  "anotherKey": true,
+  "nullKey": null,
+  "parentKey": {
+    "key": "string",
+    "someKey": 1234,
+    "anotherKey": true,
+    "nullKey": null
+  },
+  "arrayKey": [
+    "value",
+    "someValue",
+    "anotherValue"
+  ]
+}

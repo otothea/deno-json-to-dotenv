@@ -1,4 +1,4 @@
-import { resolve } from "https://deno.land/std@v0.5/fs/path.ts";
+import { resolve } from "https://deno.land/std/fs/path.ts";
 import { readFileStr, writeFileStr } from "https://deno.land/std/fs/mod.ts";
 
 type JSONValue = null | string | number | boolean | IJSONObject;
@@ -23,6 +23,7 @@ async function main() {
     jsonString = await readFileStr(resolve(jsonFilePath));
   } catch (e) {
     console.error(`Unable to read file: ${jsonFilePath}`);
+    console.error(e);
     return;
   }
 
@@ -30,7 +31,9 @@ async function main() {
   try {
     configObject = JSON.parse(jsonString);
   } catch (e) {
-    console.error(`Unable to parse json from file: ${jsonFilePath}`, e);
+    console.error(`Unable to parse json from file: ${jsonFilePath}`);
+    console.error(e);
+    return;
   }
 
   const keyValuePairs = parseKeyValuePairs(configObject);

@@ -1,6 +1,6 @@
 # JSON to Dotenv
 
-Use this Deno script to parse a json file and output a .env file
+Use this Deno script to parse a json file and output a .env file. I have also included an equivalent Node.js script `json-to-dotenv.js` for comparison.
 
 ## Usage:
 
@@ -12,21 +12,21 @@ deno json_to_dotenv.ts path/to/file.json path/to/.env
 
 ```
 {
-  key: 'string'
-  someKey: 1234,
-  anotherKey: true,
-  nullKey: null,
-  parentKey: {
-    key: 'string'
-    someKey: 1234,
-    anotherKey: true,
-    nullKey: null,
+  "key": "string",
+  "someKey": 1234,
+  "anotherKey": true,
+  "nullKey": null,
+  "parentKey": {
+    "key": "string",
+    "someKey": 1234,
+    "anotherKey": true,
+    "nullKey": null
   },
-  arrayKey: [
-    'value',
-    'someValue',
-    'anotherValue',
-  ],
+  "arrayKey": [
+    "value",
+    "someValue",
+    "anotherValue"
+  ]
 }
 ```
 
@@ -37,7 +37,6 @@ KEY=string
 SOMEKEY=1234
 ANOTHERKEY=true
 NULLKEY=null
-PARENTKEY_KEY=string
 PARENTKEY_KEY=string
 PARENTKEY_SOMEKEY=1234
 PARENTKEY_ANOTHERKEY=true
