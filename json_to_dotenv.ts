@@ -8,7 +8,10 @@ interface IJSONObject {
 }
 
 async function main() {
-  if (!Deno.args[1]) {
+  const jsonFilePath = Deno.args[1];
+  const outputFilePath = Deno.args[2] || '.env';
+
+  if (!jsonFilePath) {
     console.error(
       "Please provide a path to a json file to parse\n\nExample: deno json_to_dotenv.ts path/to/file.json"
     );
@@ -17,9 +20,9 @@ async function main() {
 
   let jsonString = "";
   try {
-    jsonString = await readFileStr(resolve(Deno.args[1]));
+    jsonString = await readFileStr(resolve(jsonFilePath));
   } catch (e) {
-    console.error(`Unable to read file: ${Deno.args[1]}`);
+    console.error(`Unable to read file: ${jsonFilePath}`);
     return;
   }
 
@@ -27,13 +30,13 @@ async function main() {
   try {
     configObject = JSON.parse(jsonString);
   } catch (e) {
-    console.error(`Unable to parse json from file: ${Deno.args[1]}`, e);
+    console.error(`Unable to parse json from file: ${jsonFilePath}`, e);
   }
 
   const keyValuePairs = parseKeyValuePairs(configObject);
   const output = keyValuePairs.map(formatKeyValuePair).join("\n");
 
-  await writeFileStr(Deno.args[2] || ".env", output + "\n");
+  await writeFileStr(resolve(outputFilePath), output + "\n");
 }
 
 function parseKeyValuePairs(json: IJSONObject, prefix?: string) {
